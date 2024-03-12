@@ -78,4 +78,13 @@
     border-radius: 0px 0px 16px 16px;
     height: 70%;
     padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calcButton{
+    border-radius: 32px;
+    height: 65px;
+    width: 65px;
+    flex: 1 0 calc(25% - 10px);
 }
