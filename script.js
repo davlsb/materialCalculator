@@ -17,10 +17,19 @@ buttons.addEventListener("click", (event) => {
             screenInput.innerText = currInput;
         }
 
-        if(event.target.classList.contains('op')){
-            operand = event.target.id;
-            lastRes.push(currInput, operand);
-            pastCalc.innerText += " " + currInput + " " + operand + " ";
+        if(event.target.classList.contains('op')) {
+            if (lastRes.length > 0 && typeof lastRes[lastRes.length - 1] === 'string') {
+                // Replace the last operand in the array
+                lastRes[lastRes.length - 1] = event.target.id;
+                console.log(pastCalc.innerText.length);
+                let pastCalcText = pastCalc.innerText;
+                pastCalc.innerText = pastCalcText.slice(0, -1) + event.target.id + " ";
+            } else {
+                operand = event.target.id;
+                lastRes.push(currInput, operand);
+                pastCalc.innerText += " " + currInput + " " + operand + " ";
+            }
+            // Update the screenInput cursor and reset currInput
             screenInput.innerHTML = '<span class="input-cursor"></span>';
             currInput = "";
         }
@@ -106,12 +115,21 @@ document.addEventListener('keydown', function(event) {
         currInput += event.key;
         screenInput.innerText = currInput;
     } else if (isOperator) {
-        operand = event.key;
-        lastRes.push(currInput, operand);
-        pastCalc.innerText += " " + currInput + " " + operand + " ";
+        if (lastRes.length > 0 && typeof lastRes[lastRes.length - 1] === 'string') {
+            console.log(event.key);
+            
+            lastRes[lastRes.length - 1] = event.key;
+            let pastCalcText = pastCalc.innerText;
+            console.log(pastCalcText);
+            pastCalc.innerText = pastCalcText.slice(0, -1) + event.key + " ";
+        } else {
+            operand = event.key;
+            lastRes.push(currInput, operand);
+            pastCalc.innerText += " " + currInput + " " + operand + " ";
+        }
         screenInput.innerHTML = '<span class="input-cursor"></span>';
         currInput = "";
-    } else if (isBackspace) {
+    }  else if (isBackspace) {
         currInput = currInput.trim();
         // Check if currInput is not empty
         if (currInput !== "") {
