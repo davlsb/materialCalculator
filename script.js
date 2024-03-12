@@ -1,12 +1,14 @@
 //create variables for current input, last result, operand
 
 let currInput = "";
-let lastRes = "";
+let lastRes = [];
 let operand = "";
 
 let buttons = document.querySelector("#buttons");
 let screenInput = document.querySelector("#currentNumber");
 let pastCalc = document.querySelector("#pastCalc");
+
+// create a stack, the stack will show on the top line every time we click +, -, /, *
 
 buttons.addEventListener("click", (event) => {
     if(event.target.tagName === 'BUTTON') {
@@ -14,13 +16,15 @@ buttons.addEventListener("click", (event) => {
             currInput = currInput + event.target.innerText;
             screenInput.innerText = currInput;
         }
+
         if(event.target.classList.contains('op')){
             operand = event.target.id;
-            lastRes = [currInput, operand];
-            pastCalc.innerText = lastRes[0] + " " + lastRes[1];
+            lastRes.push(currInput, operand);
+            pastCalc.innerText += " " + currInput + " " + operand + " ";
             screenInput.innerHTML = '<span class="input-cursor"></span>';
             currInput = "";
         }
+
         if (event.target.classList.contains('back')) {
             console.log(currInput);
             // Trim currInput to remove leading and trailing whitespace
@@ -36,24 +40,34 @@ buttons.addEventListener("click", (event) => {
             }
         }
         if(event.target.classList.contains('eq')){
-            let newResult = "";
-            switch(lastRes[1]){
-                case "x":
-                    newResult = Number(lastRes[0]) * Number(currInput);
-                    break;
-                case "/":
-                    newResult = Number(lastRes[0]) / Number(currInput);
-                    break;
-                case "+":
-                    newResult = Number(lastRes[0]) + Number(currInput);
-                    break;
-                case "-":
-                    newResult = Number(lastRes[0]) - Number(currInput);
-                    break;
-            } 
-            pastCalc.innerText = lastRes[0] + " " + lastRes[1] + " " + currInput;
+            pastCalc.innerText += " " + currInput + " =";
+            lastRes.push(currInput);
+            
+            let newResult = Number(lastRes[0]); // Start with the first number in the array
+
+            for (let i = 1; i < lastRes.length; i += 2) {
+                let operator = lastRes[i];
+                let operand = lastRes[i + 1];
+                
+                switch (operator) {
+                    case "x": // Assuming "x" represents multiplication
+                        newResult *= Number(operand);
+                        break;
+                    case "/":
+                        newResult /= Number(operand);
+                        break;
+                    case "+":
+                        newResult += Number(operand);
+                        break;
+                    case "-":
+                        newResult -= Number(operand);
+                        break;
+                }
+            }
+            lastRes = [];
+            pastCalc.innerText = " ";
             screenInput.innerText = String(newResult);
-            currInput = String(newResult);
+            currInput = newResult;
         }
         if(event.target.classList.contains('github')){
             window.open("https://github.com/davlsb", '_blank').focus();
