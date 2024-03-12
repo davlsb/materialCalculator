@@ -61,7 +61,7 @@
 
 #calcBody {
     background-color: rgb(249 243 229);;
-    width: 400px;
+    width: 330px;
     padding: 5px;
     border-radius: 16px;
     height: 600px;
@@ -86,5 +86,13 @@
     border-radius: 32px;
     height: 65px;
     width: 65px;
+    margin: 5px;
     flex: 1 0 calc(25% - 10px);
+    transition: linear 0.2s;
+    background-color: rgb(255 249 236);
+}
+
+.calcButton:hover {
+    background-color: rgb(232 226 212);
+
 }
