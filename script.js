@@ -72,5 +72,23 @@ buttons.addEventListener("click", (event) => {
         if(event.target.classList.contains('github')){
             window.open("https://github.com/davlsb", '_blank').focus();
         }
+
+        if(event.target.classList.contains('reset')){
+            currInput = "";
+            lastRes = [];
+            operand = "";
+            pastCalc.innerText = " ";
+            screenInput.innerHTML = '<span class="input-cursor"></span>';
+            deleteScreen();
+        }
     }
 });
+
+function deleteScreen(){
+    //add a cute little fade to the background in red;
+    let screen = document.querySelector("#screen");
+    screen.style.backgroundColor = "#ffdad6";
+    setTimeout(function(){
+        screen.style.backgroundColor = "#f7efc7";
+   },300);
+}
