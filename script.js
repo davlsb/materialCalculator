@@ -18,7 +18,7 @@ buttons.addEventListener("click", (event) => {
             operand = event.target.id;
             lastRes = [currInput, operand];
             pastCalc.innerText = lastRes[0] + " " + lastRes[1];
-            screenInput.innerText = "‎";
+            screenInput.innerHTML = '<span class="input-cursor"></span>';
             currInput = "";
         }
         if(event.target.classList.contains('eq')){

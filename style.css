@@ -1,54 +1,4 @@
-.light {
-    --md-sys-color-primary: rgb(108 94 16);
-    --md-sys-color-surface-tint: rgb(108 94 16);
-    --md-sys-color-on-primary: rgb(255 255 255);
-    --md-sys-color-primary-container: rgb(246 227 136);
-    --md-sys-color-on-primary-container: rgb(33 27 0);
-    --md-sys-color-secondary: rgb(101 94 64);
-    --md-sys-color-on-secondary: rgb(255 255 255);
-    --md-sys-color-secondary-container: rgb(237 227 188);
-    --md-sys-color-on-secondary-container: rgb(32 28 4);
-    --md-sys-color-tertiary: rgb(66 102 80);
-    --md-sys-color-on-tertiary: rgb(255 255 255);
-    --md-sys-color-tertiary-container: rgb(196 236 207);
-    --md-sys-color-on-tertiary-container: rgb(0 33 17);
-    --md-sys-color-error: rgb(186 26 26);
-    --md-sys-color-on-error: rgb(255 255 255);
-    --md-sys-color-error-container: rgb(255 218 214);
-    --md-sys-color-on-error-container: rgb(65 0 2);
-    --md-sys-color-background: rgb(255 249 236);
-    --md-sys-color-on-background: rgb(30 28 19);
-    --md-sys-color-surface: rgb(255 249 236);
-    --md-sys-color-on-surface: rgb(30 28 19);
-    --md-sys-color-surface-variant: rgb(233 226 208);
-    --md-sys-color-on-surface-variant: rgb(74 71 57);
-    --md-sys-color-outline: rgb(124 119 104);
-    --md-sys-color-outline-variant: rgb(205 198 180);
-    --md-sys-color-shadow: rgb(0 0 0);
-    --md-sys-color-scrim: rgb(0 0 0);
-    --md-sys-color-inverse-surface: rgb(51 48 39);
-    --md-sys-color-inverse-on-surface: rgb(247 240 226);
-    --md-sys-color-inverse-primary: rgb(217 199 111);
-    --md-sys-color-primary-fixed: rgb(246 227 136);
-    --md-sys-color-on-primary-fixed: rgb(33 27 0);
-    --md-sys-color-primary-fixed-dim: rgb(217 199 111);
-    --md-sys-color-on-primary-fixed-variant: rgb(82 71 0);
-    --md-sys-color-secondary-fixed: rgb(237 227 188);
-    --md-sys-color-on-secondary-fixed: rgb(32 28 4);
-    --md-sys-color-secondary-fixed-dim: rgb(208 199 162);
-    --md-sys-color-on-secondary-fixed-variant: rgb(77 71 43);
-    --md-sys-color-tertiary-fixed: rgb(196 236 207);
-    --md-sys-color-on-tertiary-fixed: rgb(0 33 17);
-    --md-sys-color-tertiary-fixed-dim: rgb(168 208 180);
-    --md-sys-color-on-tertiary-fixed-variant: rgb(43 78 57);
-    --md-sys-color-surface-dim: rgb(223 217 204);
-    --md-sys-color-surface-bright: rgb(255 249 236);
-    --md-sys-color-surface-container-lowest: rgb(255 255 255);
-    --md-sys-color-surface-container-low: rgb(249 243 229);
-    --md-sys-color-surface-container: rgb(244 237 223);
-    --md-sys-color-surface-container-high: rgb(238 232 218);
-    --md-sys-color-surface-container-highest: rgb(232 226 212);
-  }
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
   
   body {
     background-color:rgb(255 249 236);
@@ -57,6 +7,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    font-family: "Rubik", sans-serif;
 }
 
 #calcBody {
@@ -104,6 +55,7 @@
     border: 0;
     font-weight: 600;
     font-size: 20px;
+    font-family: "Rubik", sans-serif;
 }
 
 .calcButton:hover {
@@ -139,3 +91,19 @@
 footer {
     color: #769887;
 }
+
+.input-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 42px;
+    background-color: black;
+    margin-left: 8px;
+    animation: blink .6s linear infinite alternate;
+}
+
+@keyframes blink {
+    0% {opacity: 1;}
+    40% {opacity: 1;}
+    60% {opacity: 0;}
+    100% {opacity: 0;}
+  }
