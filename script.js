@@ -26,11 +26,20 @@ buttons.addEventListener("click", (event) => {
             switch(lastRes[1]){
                 case "x":
                     newResult = Number(lastRes[0]) * Number(currInput);
-                    console.log(newResult);
+                    break;
+                case "/":
+                    newResult = Number(lastRes[0]) / Number(currInput);
+                    break;
+                case "+":
+                    newResult = Number(lastRes[0]) + Number(currInput);
+                    break;
+                case "-":
+                    newResult = Number(lastRes[0]) - Number(currInput);
                     break;
             } 
             pastCalc.innerText = lastRes[0] + " " + lastRes[1] + " " + currInput;
             screenInput.innerText = newResult;
+            currInput = newResult;
         }
     }
 });
