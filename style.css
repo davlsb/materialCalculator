@@ -72,6 +72,8 @@
     padding: 15px;
     border-radius: 16px 16px 0px 0px;
     background-color: rgb(247, 239, 199);
+    flex-direction: column-reverse;
+    align-items: flex-end;
 }
 
 #buttons{
@@ -91,6 +93,8 @@
     transition: linear 0.2s;
     background-color: rgb(255 249 236);
     border: 0;
+    font-weight: 600;
+    font-size: 20px;
 }
 
 .calcButton:hover {
