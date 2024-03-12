@@ -71,7 +71,7 @@
     height: 20%;
     padding: 15px;
     border-radius: 16px 16px 0px 0px;
-    background-color: rgb(255 249 236);
+    background-color: rgb(247, 239, 199);
 }
 
 #buttons{
@@ -90,9 +90,35 @@
     flex: 1 0 calc(25% - 10px);
     transition: linear 0.2s;
     background-color: rgb(255 249 236);
+    border: 0;
 }
 
 .calcButton:hover {
     background-color: rgb(232 226 212);
 
+}
+
+#equals{
+   background-color: rgb(246 227 136); 
+}
+
+#equals:hover{
+    background-color: rgb(228, 209, 117); 
+ }
+ 
+#AC{
+    background-color: rgb(255 218 214);
+}
+
+#AC:hover{
+    background-color: rgb(249, 207, 202);
+}
+
+.op{
+    background-color: rgb(247, 241, 211);
+    transition: linear 0.2s;
+}
+
+.op:hover {
+    background-color: rgb(243, 230, 172);
 }
