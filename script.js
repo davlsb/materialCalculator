@@ -55,8 +55,7 @@ buttons.addEventListener("click", (event) => {
         if(event.target.classList.contains('eq')){
             pastCalc.innerText += " " + currInput + " =";
             lastRes.push(currInput);
-            currInput = (calculateExpression(lastRes));
-            lastRes.push(currInput);
+            currInput = (calculateExpression());
         }
         if(event.target.classList.contains('github')){
             window.open("https://github.com/davlsb", '_blank').focus();
@@ -92,8 +91,6 @@ document.addEventListener('keydown', function(event) {
             /^[\+\-\*\/\x]$/.test(lastRes[lastRes.length - 1]) &&
             currInput === ""
         ) {
-            console.log(event.key);
-            
             lastRes[lastRes.length - 1] = event.key;
             let pastCalcText = pastCalc.innerText;
             console.log(pastCalcText);
@@ -119,13 +116,12 @@ document.addEventListener('keydown', function(event) {
     } else if (isEnter) {
         pastCalc.innerText += " " + currInput + " =";
         lastRes.push(currInput);
-        currInput = (calculateExpression(lastRes));
-        lastRes.push(currInput);
+        currInput = (calculateExpression());
     }
   });
 
 
-function calculateExpression(lastRes) {
+function calculateExpression() {
     let newResult = Number(lastRes[0]);
     let error = false;
 
