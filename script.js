@@ -12,14 +12,11 @@ let pastCalc = document.querySelector("#pastCalc");
 
 buttons.addEventListener("click", (event) => {
     if(event.target.tagName === 'BUTTON' || event.target.tagName === "svg" || event.target.tagName === "path") {
-        console.log("well", event.target.classList);
         
         if(event.target.classList.contains('num')){
             currInput = currInput + event.target.innerText;
             screenInput.innerText = currInput;
-        }
-
-        if(event.target.classList.contains('op')) {
+        } else if(event.target.classList.contains('op')) {
             if (
                 lastRes.length > 0 &&
                 /^[\+\-\/\x]$/.test(lastRes[lastRes.length - 1]) &&
@@ -38,9 +35,10 @@ buttons.addEventListener("click", (event) => {
                 screenInput.innerHTML = '<span class="input-cursor"></span>';
                 currInput = "";
             }
-        }
-
-        if (event.target.classList.contains('back')) {
+        } else if(event.target.classList.contains('percent')) {
+            currInput = Number(currInput) * 0.01;
+            screenInput.innerText = currInput;
+        } else if (event.target.classList.contains('back')) {
             console.log(currInput);
             // Trim currInput to remove leading and trailing whitespace
             currInput = currInput.trim();
@@ -53,17 +51,13 @@ buttons.addEventListener("click", (event) => {
             if (currInput === "") {
                 screenInput.innerHTML = '<span class="input-cursor"></span>';
             }
-        }
-        if(event.target.classList.contains('eq')){
+        } else if(event.target.classList.contains('eq')){
             pastCalc.innerText += " " + currInput + " =";
             lastRes.push(currInput);
             currInput = (calculateExpression());
-        }
-        if(event.target.classList.contains('github')){
+        } else if(event.target.classList.contains('github')){
             window.open("https://github.com/davlsb", '_blank').focus();
-        }
-
-        if(event.target.classList.contains('reset')){
+        } else if(event.target.classList.contains('reset')){
             currInput = "";
             screenInput.style.overflow = "hidden"; // no overflow
             screenInput.style.whiteSpace = "nowrap"; // No whitespace wrapping
@@ -83,9 +77,13 @@ document.addEventListener('keydown', function(event) {
     const isOperator = ['+', '-', '*', '/', 'x'].includes(event.key);
     const isEnter = event.key === 'Enter' || ['='].includes(event.key);;
     const isBackspace = event.key === 'Backspace';
+    const isPercentage = event.key === "%";
 
     if (isNumber) {
         currInput += event.key;
+        screenInput.innerText = currInput;
+    } else if (isPercentage) {
+        currInput = Number(currInput) * 0.01;
         screenInput.innerText = currInput;
     } else if (isOperator) {
         if (
