@@ -11,7 +11,9 @@ let pastCalc = document.querySelector("#pastCalc");
 // create a stack, the stack will show on the top line every time we click +, -, /, *
 
 buttons.addEventListener("click", (event) => {
-    if(event.target.tagName === 'BUTTON') {
+    if(event.target.tagName === 'BUTTON' || event.target.tagName === "svg" || event.target.tagName === "path") {
+        console.log("well", event.target.classList);
+        
         if(event.target.classList.contains('num')){
             currInput = currInput + event.target.innerText;
             screenInput.innerText = currInput;
