@@ -213,19 +213,25 @@ function formatNumber(currInput) {
     }
 }
 
-
-
 function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
 }
 
-// Get the stored theme or use the system theme
-var storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-setTheme(storedTheme);
+function checkAndSetTheme() {
+    var systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    var storedTheme = localStorage.getItem('theme');
+    // Only set the theme if the stored theme is different from the system theme
+    if (storedTheme !== systemTheme) {
+        setTheme(systemTheme);
+    }
+}
+
+// Call the function to check and set the theme on page load or refresh
+checkAndSetTheme();
 
 // Listener to detect changes in system theme
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     setTheme(e.matches ? 'dark' : 'light');
+    localStorage.setItem('theme', e.matches ? 'dark' : 'light'); // Update localStorage
 });
-
