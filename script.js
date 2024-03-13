@@ -80,7 +80,7 @@ buttons.addEventListener("click", (event) => {
 document.addEventListener('keydown', function(event) {
     const isNumber = isFinite(event.key);
     const isOperator = ['+', '-', '*', '/', 'x'].includes(event.key);
-    const isEnter = event.key === 'Enter';
+    const isEnter = event.key === 'Enter' || ['='].includes(event.key);;
     const isBackspace = event.key === 'Backspace';
 
     if (isNumber) {
