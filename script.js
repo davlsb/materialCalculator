@@ -3,6 +3,7 @@
 let currInput = "";
 let lastRes = [];
 let operand = "";
+let screen = document.querySelector("#screen");
 
 let buttons = document.querySelector("#buttons");
 let screenInput = document.querySelector("#currentNumber");
@@ -158,14 +159,25 @@ function calculateExpression() {
 
     lastRes = [];
     pastCalc.innerText = " ";
+    pastScreenWidth = screenInput.style.width;
 
     if (!error) {
         screenInput.innerText = String(newResult);
     } else {
-        screenInput.innerText = "You tried to divide by 0. AC and try again.";
+        screenInput.innerText = "You tried to divide by 0. Try again.";
         screenInput.style.overflow = "visible"; // Allow overflow
         screenInput.style.whiteSpace = "wrap"; // No whitespace wrapping
         screenInput.style.direction = "ltr"; // Direction is left-to-right (normal)
+        screenInput.style.width = "200px";
+        screen.classList.toggle("errorMsg");
+        setTimeout(function(){
+            screenInput.innerText = currInput;
+            screenInput.style.overflow = "hidden"; // Allow overflow
+            screenInput.style.whiteSpace = "nowrap"; // No whitespace wrapping
+            screenInput.style.direction = "rtl"; // Direction is left-to-right (normal)
+            screenInput.style.width = pastScreenWidth;
+            screen.classList.toggle("errorMsg");
+       },2000);
     }
 
     return newResult.toString(); // Set current input to the result
@@ -174,7 +186,6 @@ function calculateExpression() {
 
 function deleteScreen(){
     let currNum = document.querySelector("#currentNumber");
-    let screen = document.querySelector("#screen");
     let acColor = getComputedStyle(document.querySelector("#AC")).backgroundColor;
     let previousColor = screen.style.backgroundColor;
     currNum.classList.add('ripple');

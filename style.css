@@ -64,6 +64,11 @@ body {
     aspect-ratio: 1/1.9;
 }
 
+.errorMsg {
+    justify-content: center;
+    align-items: flex-start !important;
+}
+
 #screen {
     height: 20%;
     padding: 20px;
@@ -155,6 +160,7 @@ footer {
 footer a {
     color: #769887;
 }
+
 
 .input-cursor {
     display: inline-block;
