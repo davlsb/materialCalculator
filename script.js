@@ -18,20 +18,25 @@ buttons.addEventListener("click", (event) => {
         }
 
         if(event.target.classList.contains('op')) {
-            if (lastRes.length > 0 && typeof lastRes[lastRes.length - 1] === 'string') {
+            if (
+                lastRes.length > 0 &&
+                /^[\+\-\/\x]$/.test(lastRes[lastRes.length - 1]) &&
+                currInput === ""
+            ) {
                 // Replace the last operand in the array
                 lastRes[lastRes.length - 1] = event.target.id;
                 console.log(pastCalc.innerText.length);
+                console.log(currInput);
                 let pastCalcText = pastCalc.innerText;
                 pastCalc.innerText = pastCalcText.slice(0, -1) + event.target.id + " ";
             } else {
+                console.log("it won't get here");
                 operand = event.target.id;
                 lastRes.push(currInput, operand);
                 pastCalc.innerText += " " + currInput + " " + operand + " ";
+                screenInput.innerHTML = '<span class="input-cursor"></span>';
+                currInput = "";
             }
-            // Update the screenInput cursor and reset currInput
-            screenInput.innerHTML = '<span class="input-cursor"></span>';
-            currInput = "";
         }
 
         if (event.target.classList.contains('back')) {
@@ -107,7 +112,7 @@ buttons.addEventListener("click", (event) => {
 
 document.addEventListener('keydown', function(event) {
     const isNumber = isFinite(event.key);
-    const isOperator = ['+', '-', '*', '/'].includes(event.key);
+    const isOperator = ['+', '-', '*', '/', 'x'].includes(event.key);
     const isEnter = event.key === 'Enter';
     const isBackspace = event.key === 'Backspace';
 
@@ -115,7 +120,11 @@ document.addEventListener('keydown', function(event) {
         currInput += event.key;
         screenInput.innerText = currInput;
     } else if (isOperator) {
-        if (lastRes.length > 0 && typeof lastRes[lastRes.length - 1] === 'string') {
+        if (
+            lastRes.length > 0 &&
+            /^[\+\-\*\/\x]$/.test(lastRes[lastRes.length - 1]) &&
+            currInput === ""
+        ) {
             console.log(event.key);
             
             lastRes[lastRes.length - 1] = event.key;
@@ -126,9 +135,9 @@ document.addEventListener('keydown', function(event) {
             operand = event.key;
             lastRes.push(currInput, operand);
             pastCalc.innerText += " " + currInput + " " + operand + " ";
+            screenInput.innerHTML = '<span class="input-cursor"></span>';
+            currInput = "";
         }
-        screenInput.innerHTML = '<span class="input-cursor"></span>';
-        currInput = "";
     }  else if (isBackspace) {
         currInput = currInput.trim();
         // Check if currInput is not empty
@@ -153,6 +162,9 @@ document.addEventListener('keydown', function(event) {
             
             switch (operator) {
                 case "*":
+                    newResult *= Number(operand);
+                    break;
+                case "x":
                     newResult *= Number(operand);
                     break;
                 case "/":

@@ -77,10 +77,20 @@ body {
 
 #currentNumber {
     font-size: 35px;
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    direction: rtl;
 }
 
 #pastCalc {
     font-size: 25px;
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: end;
 }
 
 #buttons{
