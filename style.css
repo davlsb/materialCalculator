@@ -1,7 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
   
-  body {
-    background-color:rgb(234, 224, 202);
+:root {
+    --background-color: #fff;
+    --text-color: #121416d8;
+    --link-color: #543fd7;
+}
+
+html[data-theme='light'] {
+    --body-color: rgb(234, 224, 202);
+    --background-color: rgb(249 243 229);
+    --screen-color: #f7efc7;
+    --text-color: #121416d8;
+    --equals-color: rgb(246 227 136);
+    --ac-color: #ffdad6;
+    --op-color: rgb(247, 241, 211);
+    --button-color: rgb(255 249 236);
+    --font-color: black;
+    --invert:invert(0%);
+}
+
+html[data-theme='dark'] {
+    --body-color: rgb(40 40 37);
+    --background-color: rgb(48 47 40);
+    --screen-color: rgb(71 67 48);
+    --text-color: #F7F8F8;
+    --equals-color: rgb(180, 160, 20);
+    --ac-color: #b38f8b;
+    --op-color: rgb(157 149 107);
+    --button-color: rgb(65 63 51);
+    --font-color: white;
+    --invert:invert(100%);
+}
+
+html button:hover {
+    filter: brightness(85%);
+}
+
+svg {
+    -webkit-filter: var(--invert);
+    filter: var(--invert);
+}
+
+body {
+    background-color:var(--body-color);
     margin: 0;
     display: flex;
     justify-content: center;
@@ -9,21 +50,23 @@
     height: 100svh;
     min-height: -webkit-fill-available;
     font-family: "Rubik", sans-serif;
+    color: var(--font-color);
 }
 
 #calcBody {
-    background-color: rgb(249 243 229);;
+    background-color: var(--background-color);
     padding: 5px;
     margin: 0px 20px;
     border-radius: 16px;
     height: 90svh;
+    aspect-ratio: 1/2;
 }
 
 #screen {
     height: 20%;
     padding: 20px;
     border-radius: 16px 16px 16px 16px;
-    background-color: #f7efc7;
+    background-color: var(--screen-color);
     display:flex;
     flex-direction: column-reverse;
     align-items: flex-end;
@@ -53,41 +96,26 @@
     margin: 5px;
     flex: 1 0 calc(25% - 10px);
     transition: linear 0.2s;
-    background-color: rgb(255 249 236);
+    background-color: var(--button-color);
     border: 0;
     font-weight: 600;
     font-size: 20px;
     font-family: "Rubik", sans-serif;
+    color: var(--font-color);
 }
 
-.calcButton:hover {
-    background-color: rgb(232 226 212);
-
-}
 
 #equals{
-   background-color: rgb(246 227 136); 
+   background-color: var(--equals-color); 
 }
 
-#equals:hover{
-    background-color: rgb(228, 209, 117); 
- }
- 
 #AC{
-    background-color: #ffdad6;
-}
-
-#AC:hover{
-    background-color: rgb(249, 207, 202);
+    background-color: var(--ac-color);
 }
 
 .op{
-    background-color: rgb(247, 241, 211);
+    background-color: var(--op-color);
     transition: linear 0.2s;
-}
-
-.op:hover {
-    background-color: rgb(243, 230, 172);
 }
 
 footer {
@@ -98,7 +126,7 @@ footer {
     display: inline-block;
     width: 2px;
     height: 42px;
-    background-color: black;
+    background-color: var(--font-color);
     margin-left: 8px;
     animation: blink .6s linear infinite alternate;
 }
@@ -111,10 +139,11 @@ footer {
 }
 
 @media (max-width: 600px) {
+    :root {
+        touch-action: pan-x pan-y;
+      }
+
     #calcBody {
-        background-color: rgb(249 243 229);;
-        padding: 5px;
-        border-radius: 16px;
         height: 90vh;
         width: 90vw;
     }

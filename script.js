@@ -183,10 +183,28 @@ document.addEventListener('keydown', function(event) {
   });
 
 function deleteScreen(){
-    //add a cute little fade to the background in red;
+    //add a cute little fade to the background to AC button color;
     let screen = document.querySelector("#screen");
-    screen.style.backgroundColor = "#ffdad6";
+    let acColor = getComputedStyle(document.querySelector("#AC")).backgroundColor;
+    console.log(acColor);
+    let previousColor = screen.style.backgroundColor;
+    screen.style.backgroundColor = acColor;
     setTimeout(function(){
-        screen.style.backgroundColor = "#f7efc7";
+        screen.style.backgroundColor = previousColor;
    },300);
 }
+
+function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+}
+
+// Get the stored theme or use the system theme
+var storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+setTheme(storedTheme);
+
+// Listener to detect changes in system theme
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    setTheme(e.matches ? 'dark' : 'light');
+});
+
