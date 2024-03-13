@@ -90,6 +90,10 @@ buttons.addEventListener("click", (event) => {
             }
             lastRes = [];
             pastCalc.innerText = " ";
+            if (Math.abs(newResult) >= 1e10) {
+                // Convert the number to exponential notation
+                newResult = newResult.toExponential();
+            }
             if(!error) screenInput.innerText = String(newResult);
             else screenInput.innerText = "You tried to divide by 0. AC and try again.";
             currInput = newResult;
@@ -188,6 +192,10 @@ document.addEventListener('keydown', function(event) {
         }
         lastRes = [];
         pastCalc.innerText = " ";
+        if (Math.abs(newResult) >= 1e10) {
+            // Convert the number to exponential notation
+            newResult = newResult.toExponential();
+        }
         if(!error) screenInput.innerText = String(newResult);
         else screenInput.innerText = "You tried to divide by 0. AC and try again.";
         currInput = newResult.toString(); // Set current input to the result
