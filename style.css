@@ -124,6 +124,10 @@ footer {
     color: #769887;
 }
 
+footer a {
+    color: #769887;
+}
+
 .input-cursor {
     display: inline-block;
     width: 2px;
