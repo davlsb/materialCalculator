@@ -1,0 +1,26 @@
+{
+"name": "Material Calculator",
+"short_name": "Calculator",
+"start_url": "https://davlsb.github.io/materialCalculator/index.html",
+"display": "standalone",
+"description": "a very simple Calculator with a material design touch",
+"lang": "en",
+"dir": "auto",
+"theme_color": "#9d956b",
+"background_color": "#f7efc7",
+"orientation": "any",
+"icons": [
+    {
+        "src": "https://www.pwabuilder.com/assets/icons/icon_512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "https://www.pwabuilder.com/assets/icons/icon_192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+    }
+]
+}
