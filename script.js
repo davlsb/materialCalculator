@@ -180,15 +180,17 @@ function calculateExpression() {
 
 
 function deleteScreen(){
-    //add a cute little fade to the background to AC button color;
+    let currNum = document.querySelector("#currentNumber");
     let screen = document.querySelector("#screen");
     let acColor = getComputedStyle(document.querySelector("#AC")).backgroundColor;
-    console.log(acColor);
     let previousColor = screen.style.backgroundColor;
-    screen.style.backgroundColor = acColor;
+    currNum.classList.add('ripple');
+    //add a cute little fade to the background to AC button color;
+    //screen.style.backgroundColor = acColor;
     setTimeout(function(){
-        screen.style.backgroundColor = previousColor;
-   },300);
+        currNum.classList.remove('ripple');
+        //screen.style.backgroundColor = previousColor;
+   },400);
 }
 
 function setTheme(theme) {
