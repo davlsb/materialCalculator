@@ -95,7 +95,12 @@ buttons.addEventListener("click", (event) => {
                 newResult = newResult.toExponential();
             }
             if(!error) screenInput.innerText = String(newResult);
-            else screenInput.innerText = "You tried to divide by 0. AC and try again.";
+            else{
+                screenInput.innerText = "You tried to divide by 0. AC and try again.";
+                screenInput.style.overflow = "visible"; // Allow overflow
+                screenInput.style.whiteSpace = "wrap"; // No whitespace wrapping
+                screenInput.style.direction = "ltr"; // Direction is left-to-right (normal)
+            }
             currInput = newResult;
         }
         if(event.target.classList.contains('github')){
@@ -104,6 +109,9 @@ buttons.addEventListener("click", (event) => {
 
         if(event.target.classList.contains('reset')){
             currInput = "";
+            screenInput.style.overflow = "hidden"; // no overflow
+            screenInput.style.whiteSpace = "nowrap"; // No whitespace wrapping
+            screenInput.style.direction = "rtl"; // Direction is right-to-left
             lastRes = [];
             operand = "";
             pastCalc.innerText = " ";
@@ -197,7 +205,13 @@ document.addEventListener('keydown', function(event) {
             newResult = newResult.toExponential();
         }
         if(!error) screenInput.innerText = String(newResult);
-        else screenInput.innerText = "You tried to divide by 0. AC and try again.";
+        else{
+            screenInput.innerText = "You tried to divide by 0. AC and try again.";
+            screenInput.style.overflow = "visible"; // Allow overflow
+            screenInput.style.whiteSpace = "wrap"; // No whitespace wrapping
+            screenInput.style.direction = "ltr"; // Direction is left-to-right (normal)
+        }
+
         currInput = newResult.toString(); // Set current input to the result
     }
   });
