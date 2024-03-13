@@ -45,12 +45,14 @@ body {
     background-color:var(--body-color);
     margin: 0;
     display: flex;
-    justify-content: center;
+    display: flex;
+    justify-content: space-around;
     align-items: center;
     height: 100svh;
     min-height: -webkit-fill-available;
     font-family: "Rubik", sans-serif;
     color: var(--font-color);
+    flex-direction: column;
 }
 
 #calcBody {
