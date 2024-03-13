@@ -30,7 +30,6 @@ buttons.addEventListener("click", (event) => {
                 let pastCalcText = pastCalc.innerText;
                 pastCalc.innerText = pastCalcText.slice(0, -1) + event.target.id + " ";
             } else {
-                console.log("it won't get here");
                 operand = event.target.id;
                 lastRes.push(currInput, operand);
                 pastCalc.innerText += " " + currInput + " " + operand + " ";
@@ -56,52 +55,8 @@ buttons.addEventListener("click", (event) => {
         if(event.target.classList.contains('eq')){
             pastCalc.innerText += " " + currInput + " =";
             lastRes.push(currInput);
-            
-            let newResult = Number(lastRes[0]); // Start with the first number in the array
-            let error = false;
-
-
-            for (let i = 1; i < lastRes.length; i += 2) {
-                let operator = lastRes[i];
-                let operand = lastRes[i + 1];
-                
-                switch (operator) {
-                    case "x": // Assuming "x" represents multiplication
-                        newResult *= Number(operand);
-                        break;
-                    case "/":
-                        if (Number(operand) === 0) {
-                            console.log("Error: Division by zero detected.");
-                            error = true;
-                            break;
-                        }
-                        newResult /= Number(operand);
-                        break;
-                    case "+":
-                        newResult += Number(operand);
-                        break;
-                    case "-":
-                        newResult -= Number(operand);
-                        break;
-                }
-                if (error) {
-                    break; // break out of the loop if error occurred
-                }
-            }
-            lastRes = [];
-            pastCalc.innerText = " ";
-            if (Math.abs(newResult) >= 1e10) {
-                // Convert the number to exponential notation
-                newResult = newResult.toExponential();
-            }
-            if(!error) screenInput.innerText = String(newResult);
-            else{
-                screenInput.innerText = "You tried to divide by 0. AC and try again.";
-                screenInput.style.overflow = "visible"; // Allow overflow
-                screenInput.style.whiteSpace = "wrap"; // No whitespace wrapping
-                screenInput.style.direction = "ltr"; // Direction is left-to-right (normal)
-            }
-            currInput = newResult;
+            currInput = (calculateExpression(lastRes));
+            lastRes.push(currInput);
         }
         if(event.target.classList.contains('github')){
             window.open("https://github.com/davlsb", '_blank').focus();
@@ -164,57 +119,67 @@ document.addEventListener('keydown', function(event) {
     } else if (isEnter) {
         pastCalc.innerText += " " + currInput + " =";
         lastRes.push(currInput);
-        
-        let newResult = Number(lastRes[0]); // Start with the first number in the array
-        let error = false;
-
-        for (let i = 1; i < lastRes.length; i += 2) {
-            let operator = lastRes[i];
-            let operand = lastRes[i + 1];
-            
-            switch (operator) {
-                case "*":
-                    newResult *= Number(operand);
-                    break;
-                case "x":
-                    newResult *= Number(operand);
-                    break;
-                case "/":
-                    if (Number(operand) === 0) {
-                        console.log("Error: Division by zero detected.");
-                        error = true;
-                        break;
-                    }
-                    newResult /= Number(operand);
-                    break;
-                case "+":
-                    newResult += Number(operand);
-                    break;
-                case "-":
-                    newResult -= Number(operand);
-                    break;
-            }
-            if (error) {
-                break; // break out of the loop if error occurred
-            }
-        }
-        lastRes = [];
-        pastCalc.innerText = " ";
-        if (Math.abs(newResult) >= 1e10) {
-            // Convert the number to exponential notation
-            newResult = newResult.toExponential();
-        }
-        if(!error) screenInput.innerText = String(newResult);
-        else{
-            screenInput.innerText = "You tried to divide by 0. AC and try again.";
-            screenInput.style.overflow = "visible"; // Allow overflow
-            screenInput.style.whiteSpace = "wrap"; // No whitespace wrapping
-            screenInput.style.direction = "ltr"; // Direction is left-to-right (normal)
-        }
-
-        currInput = newResult.toString(); // Set current input to the result
+        currInput = (calculateExpression(lastRes));
+        lastRes.push(currInput);
     }
   });
+
+
+function calculateExpression(lastRes) {
+    let newResult = Number(lastRes[0]);
+    let error = false;
+
+    for (let i = 1; i < lastRes.length; i += 2) {
+        let operator = lastRes[i];
+        let operand = lastRes[i + 1];
+
+        switch (operator) {
+            case "*":
+                newResult *= Number(operand);
+                break;
+            case "x":
+                newResult *= Number(operand);
+                break;
+            case "/":
+                if (Number(operand) === 0) {
+                    console.log("Error: Division by zero detected.");
+                    error = true;
+                    break;
+                }
+                newResult /= Number(operand);
+                break;
+            case "+":
+                newResult += Number(operand);
+                break;
+            case "-":
+                newResult -= Number(operand);
+                break;
+        }
+        if (error) {
+            break; // break out of the loop if error occurred
+        }
+    }
+
+    lastRes = [];
+    pastCalc.innerText = " ";
+
+    if (Math.abs(newResult) >= 1e10) {
+        // Convert the number to exponential notation
+        newResult = newResult.toExponential();
+    }
+
+    if (!error) {
+        screenInput.innerText = String(newResult);
+    } else {
+        screenInput.innerText = "You tried to divide by 0. AC and try again.";
+        screenInput.style.overflow = "visible"; // Allow overflow
+        screenInput.style.whiteSpace = "wrap"; // No whitespace wrapping
+        screenInput.style.direction = "ltr"; // Direction is left-to-right (normal)
+    }
+
+    return newResult.toString(); // Set current input to the result
+}
+
 
 function deleteScreen(){
     //add a cute little fade to the background to AC button color;
