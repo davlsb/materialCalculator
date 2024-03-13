@@ -24,8 +24,6 @@ buttons.addEventListener("click", (event) => {
             ) {
                 // Replace the last operand in the array
                 lastRes[lastRes.length - 1] = event.target.id;
-                console.log(pastCalc.innerText.length);
-                console.log(currInput);
                 let pastCalcText = pastCalc.innerText;
                 pastCalc.innerText = pastCalcText.slice(0, -1) + event.target.id + " ";
             } else {
@@ -39,8 +37,6 @@ buttons.addEventListener("click", (event) => {
             currInput = Number(currInput) * 0.01;
             screenInput.innerText = currInput;
         } else if (event.target.classList.contains('back')) {
-            console.log(currInput);
-            // Trim currInput to remove leading and trailing whitespace
             currInput = currInput.trim();
             // Check if currInput is not empty
             if (currInput !== "") {
@@ -95,7 +91,6 @@ document.addEventListener('keydown', function(event) {
         ) {
             lastRes[lastRes.length - 1] = event.key;
             let pastCalcText = pastCalc.innerText;
-            console.log(pastCalcText);
             pastCalc.innerText = pastCalcText.slice(0, -1) + event.key + " ";
         } else {
             operand = event.key;
@@ -217,69 +212,6 @@ function formatNumber(currInput) {
         return currInput;
     }
 }
-
-
-// calc number of int, number of decimals
-// calc allowed num of decimals (9-number of int)
-// round num of decimals to that number and replace the curr num decimals with that rounded one
-// if number of the int is larger than 9, make it scientific notation
-// function formatNumber(num) {
-//     // Convert number to string
-//     let numStr = num.toString();
-//     console.log("new numStr", numStr);
-
-//     // Split the number into integer and decimal parts
-//     let parts = numStr.split('.');
-//     let integerPart = parts[0];
-//     let decimalPart = parts[1] || '';
-
-//     // Calculate the number of integer digits
-//     let numIntegers = integerPart.length;
-
-//     // Calculate the number of decimal digits
-//     let numDecimals = decimalPart.length;
-//     let allowedDecimals = 9 - numIntegers >= 0 ? 9 - numIntegers : 0 ;
-
-
-//     //fix the decimal part
-//     if (numDecimals > allowedDecimals) {
-//     // Get the integer part as a number
-//         let integerPartNum = parseInt(integerPart);
-
-//         // Get the decimal part as a number
-//         let decimalPartNum = parseFloat('0.' + decimalPart);
-
-//         // Round the decimal part to the allowed number of digits
-//         let roundedDecimal = decimalPartNum.toFixed(allowedDecimals);
-
-//         // Combine integer and rounded decimal parts to get the new number
-//         numStr = integerPartNum + parseFloat(roundedDecimal);
-
-//         // If the new number is an integer, convert it to a string without decimal part
-//         if (roundedDecimal === '0') {
-//             numStr = integerPartNum.toString();
-//         }
-
-//         // If the rounded decimal part starts with 1, increment the integer part
-//         if (roundedDecimal[0] === '1') {
-//             numStr = (integerPartNum + 1).toString();
-//         }
-//     }
-
-//     // If the total number of digits is within 9, return the number as is
-//     if (numStr.length - 1 <= 9) {
-//         return numStr;
-//     }
-
-//     if (Math.abs(numStr) >= 1e10) {
-//         // Convert the number to exponential notation
-//         numStr = Number(numStr).toExponential();
-//     }
-
-//     return numStr;
-
-
-// }
 
 
 
